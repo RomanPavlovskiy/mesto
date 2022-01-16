@@ -1,0 +1,29 @@
+.profile__edit {
+  display: flex;
+  background-image: url(../../../images/edit.png);
+  background-repeat: no-repeat;
+  background-color: transparent;
+  background-position: center;
+  margin-bottom: 0px;
+  width: 24px;
+  height: 24px;
+  padding: 6px;
+  border: 1px solid white;
+  align-items: center;
+  align-self: center;
+  align-content: center;
+  transition: opacity .5s linear 0s;
+}
+
+.profile__edit:hover {
+  opacity: 0.6;
+  cursor: pointer;
+}
+
+
+@media screen and (max-width:1024px) and (min-width:320px) {
+  .profile__edit {
+    position: relative;
+    grid-area: edit;
+    }
+}
