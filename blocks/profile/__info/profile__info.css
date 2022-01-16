@@ -16,8 +16,8 @@
   .profile__info {
     margin-left: 0;
     column-gap: 10px;
-    grid-template-areas: 
+    grid-template-areas:
     "name edit"
-    "job job"   
+    "job job";
   }
 }
