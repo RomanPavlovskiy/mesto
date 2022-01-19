@@ -9,78 +9,78 @@
   </head>
 
   <body>
-  <div class="page">
-    <div class="main">
+    <div class="page">
       <header class="header">
         <img class="header__logo" src="images/logo.svg" alt="логотип">
       </header>
-      <section class="profile">
-        <div class="profile-user">
-          <img class="profile__avatar" src="images/avatar.jpg" alt="аватарка">
-          <div class="profile__info">
-            <h1 class="profile__name">Жак-Ив Кусто</h1>
-            <button class="profile__edit" type="button"></button>
-            <h2 class="profile__profession">Исследователь океана</h2>
+      <main>
+        <section class="profile">
+          <div class="profile__user">
+            <img class="profile__avatar" src="images/avatar.jpg" alt="аватарка">
+            <div class="profile__info">
+              <h1 class="profile__name">Жак-Ив Кусто</h1>
+              <button class="profile__edit" type="button" aria-label="редактировать профиль"></button>
+              <p class="profile__profession">Исследователь океана</p>
+            </div>
           </div>
-        </div>
-        <button class="profile__addbutton" type="button"></button>
-      </section>
-      <section class="elements">
-        <div class="element">
-          <img class="element__photo" src="images/dagestan.jpg" alt="Дагестан">
-          <div class="element__footer">
-            <p class="element__title">Дагестан</p>
-            <img class="element__like" src="images/like.svg" alt="лайк">
-          </div>
-        </div>
-        <div class="element">
-          <img class="element__photo" src="images/kavkaz.jpg" alt="Кавказ">
-          <div class="element__footer">
-            <p class="element__title">Кавказские горы</p>
-            <img class="element__like" src="images/like.svg" alt="лайк">
-          </div>
-        </div>
-        <div class="element">
-          <img class="element__photo" src="images/moscow.jpg" alt="Москва">
-          <div class="element__footer">
-            <p class="element__title">Москва</p>
-            <img class="element__like" src="images/like.svg" alt="лайк">
-          </div>
-        </div>
-        <div class="element">
-          <img class="element__photo" src="images/riza.jpg" alt="Абхазия">
-          <div class="element__footer">
-            <p class="element__title">Абхазия</p>
-            <img class="element__like" src="images/like.svg" alt="лайк">
-          </div>
-        </div>
-        <div class="element">
-          <img class="element__photo" src="images/altai.jpg" alt="Алтай">
-          <div class="element__footer">
-            <p class="element__title">Алтай</p>
-            <img class="element__like" src="images/like.svg" alt="лайк">
-          </div>
-        </div>
-        <div class="element">
-          <img class="element__photo" src="images/teriberka.jpg" alt="Териберка">
-          <div class="element__footer">
-            <p class="element__title">Териберка</p>
-            <img class="element__like" src="images/like.svg" alt="лайк">
-          </div>
-        </div>
-      </section>
-      <section class="footer">
+          <button class="profile__add-button" type="button" aria-label="добавить карточку"></button>
+        </section>
+        <section class="elements">
+          <article class="element">
+            <img class="element__photo" src="images/dagestan.jpg" alt="Дагестан">
+            <div class="element__footer">
+              <h2 class="element__title">Дагестан</h2>
+              <button class="element__like" type="button" aria-label="поставить лайк"></button>
+            </div>
+          </article>
+          <article class="element">
+            <img class="element__photo" src="images/kavkaz.jpg" alt="Кавказ">
+            <div class="element__footer">
+              <h2 class="element__title">Кавказские горы</h2>
+              <button class="element__like" type="button" aria-label="поставить лайк"></button>
+            </div>
+          </article>
+          <article class="element">
+            <img class="element__photo" src="images/moscow.jpg" alt="Москва">
+            <div class="element__footer">
+              <h2 class="element__title">Москва</h2>
+              <button class="element__like" type="button" aria-label="поставить лайк"></button>
+            </div>
+          </article>
+          <article class="element">
+            <img class="element__photo" src="images/riza.jpg" alt="Абхазия">
+            <div class="element__footer">
+              <h2 class="element__title">Абхазия</h2>
+              <button class="element__like" type="button" aria-label="поставить лайк"></button>
+            </div>
+          </article>
+          <article class="element">
+            <img class="element__photo" src="images/altai.jpg" alt="Алтай">
+            <div class="element__footer">
+              <h2 class="element__title">Алтай</h2>
+              <button class="element__like" type="button" aria-label="поставить лайк"></button>
+            </div>
+          </article>
+          <article class="element">
+            <img class="element__photo" src="images/teriberka.jpg" alt="Териберка">
+            <div class="element__footer">
+              <h2 class="element__title">Териберка</h2>
+              <button class="element__like" type="button" aria-label="поставить лайк"></button>
+            </div>
+          </article>
+        </section>
+      </main>
+      <footer class="footer">
         <p class="footer__copyright">© 2020 Mesto Russia</p>
-      </section>
-    </div>
+      </footer>
     <div class="popup">
       <div class="popup__container">
         <button class="popup__close" type="button"></button>
-        <form class="popup__form">
-        <p class="popup__header">Редактировать профиль</p>
-        <input class="popup__input popup__input_name" name="name" value="Жак-Ив Кусто" placeholder="Имя пользователя" minlength="2" maxlength="40" required>
-        <input class="popup__input popup__input_job" name="description" value="Исследователь океана" placeholder="Описание пользователя" minlength="2" maxlength="200" required>
-        <button class="popup__button" type="submit">Сохранить</button>
+        <form class="popup__form" name="edit">
+          <h3 class="popup__header">Редактировать профиль</h3>
+          <input class="popup__input popup__input_type_name" name="name" value="" placeholder="Имя пользователя" minlength="2" maxlength="40" required>
+          <input class="popup__input popup__input_type_job" name="description" value="" placeholder="Описание пользователя" minlength="2" maxlength="200" required>
+          <button class="popup__button" type="submit">Сохранить</button>
         </form>
       </div>
     </div>
