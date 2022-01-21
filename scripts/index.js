@@ -21,9 +21,9 @@ function formSubmitHandler (evt) {
     evt.preventDefault(); // Эта строчка отменяет стандартную отправку формы.
     nameProfile.textContent = nameInput.value;
     jobProfile.textContent = jobInput.value;
+    closePopup();
 }
 
 editProfilePopupButton.addEventListener('click', editProfile);
 popupCloseButton.addEventListener('click', closePopup);
 formElement.addEventListener('submit', formSubmitHandler);
-formElement.addEventListener('submit', closePopup);
