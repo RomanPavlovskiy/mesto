@@ -1,13 +1,13 @@
 .popup__close {
   background-image: url(../../../images/close.svg);
-  position: relative;
+  position: absolute;
   width: 32px;
   height: 32px;
   border: none;
   padding: 0;
   background-color: transparent;
-  bottom: 40px;
-  left: 400px;
+  top: -40px;
+  right: -40px;
   transition: opacity .5s linear 0s;
 }
 
@@ -18,8 +18,8 @@
 
 @media screen and (max-width:768px) and (min-width:320px) {
   .popup__close {
-    bottom: 35px;
-    left: 238px;
+    top: 5px;
+    right: 0;
     width: 20px;
     height: 20px;
     background-size: contain;
