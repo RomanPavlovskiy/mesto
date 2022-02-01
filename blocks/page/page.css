@@ -9,6 +9,7 @@
   text-rendering: optimizeLegibility;
   box-sizing: border-box;
   min-width: 320px;
+  min-height: 100vh;
   padding-left: 200px;
   padding-right: 200px;
   margin: 0 auto;
