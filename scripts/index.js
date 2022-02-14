@@ -11,15 +11,33 @@ const jobProfile = document.querySelector('.profile__profession');
 // функции открытия и закрытия попапа
 function openPopup(popup) {
   popup.classList.add('popup_opened');
+  popup.addEventListener('click', closePopupOverlayClick);
+  document.addEventListener('keydown', handleClosePopupEscape);
 }
 
 function closePopup(popup) {
   popup.classList.remove('popup_opened');
+  popup.removeEventListener('click', closePopupOverlayClick);
+  document.removeEventListener('keydown', handleClosePopupEscape);
 }
+
+// функция закрытия попапа по Esc
+const handleClosePopupEscape = function (evt) {
+	if (evt.key === 'Escape') {
+		closePopup(document.querySelector('.popup_opened'));
+	}
+}
+
+// функция закрытия попапа по клику на оверлей
+const closePopupOverlayClick = function (evt) {
+  if (evt.target === evt.currentTarget) {
+    closePopup(evt.target);
+  };
+};
 
 //попап редактирования профиля
 function editProfile() {
-  popupEditProfile.classList.add('popup_opened')
+  openPopup(popupEditProfile)
   nameInput.value = nameProfile.textContent;
   jobInput.value = jobProfile.textContent;
 }
@@ -34,6 +52,7 @@ function handleProfileFormSubmit (evt) {
   jobProfile.textContent = jobInput.value;
   closePopup(popupEditProfile);
 }
+
 //попап добавления карточки
 const addCardButton = document.querySelector('.profile__add-button');
 const popupAddCard = document.querySelector('.popup_type_add-card');
@@ -153,3 +172,4 @@ editProfilePopupButton.addEventListener('click', editProfile);
 profilePopupCloseButton.addEventListener('click', closeProfilePopup);
 formEditProfile.addEventListener('submit', handleProfileFormSubmit);
 formAddCard.addEventListener('submit', handleNewCardFormSubmit);
+
