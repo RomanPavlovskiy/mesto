@@ -57,6 +57,10 @@ function enableValidation ({formSelector, inputSelector, submitButtonSelector, .
   const inputs = form.querySelectorAll(inputSelector);
   const button = form.querySelector(submitButtonSelector);
 
+  form.addEventListener('reset', () => {
+    disableButton(button, rest);
+  })
+
   checkButtonValidity(rest, form, button);
 
   inputs.forEach(input => {
