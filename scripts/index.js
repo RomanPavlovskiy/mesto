@@ -1,4 +1,4 @@
-const popup = document.querySelector('.popup');
+const profilePopup = document.querySelector('.popup');
 const editProfilePopupButton = document.querySelector('.profile__edit');
 const popupEditProfile = document.querySelector('.popup_type_profile');
 const profilePopupCloseButton = document.querySelector('.popup__close_type_profile');
@@ -9,15 +9,15 @@ const nameProfile = document.querySelector('.profile__name');
 const jobProfile = document.querySelector('.profile__profession');
 
 // функции открытия и закрытия попапа
-function openPopup(popup) {
-  popup.classList.add('popup_opened');
-  popup.addEventListener('click', closePopupOverlayClick);
+function openPopup(profilePopup) {
+  profilePopup.classList.add('popup_opened');
+  profilePopup.addEventListener('click', closePopupOverlayClick);
   document.addEventListener('keydown', handleClosePopupEscape);
 }
 
-function closePopup(popup) {
-  popup.classList.remove('popup_opened');
-  popup.removeEventListener('click', closePopupOverlayClick);
+function closePopup(profilePopup) {
+  profilePopup.classList.remove('popup_opened');
+  profilePopup.removeEventListener('click', closePopupOverlayClick);
   document.removeEventListener('keydown', handleClosePopupEscape);
 }
 
