@@ -49,17 +49,12 @@ const checkButtonValidity = ({inactiveButtonClass}, form, button) => {
 }
 
 function enableValidation ({formSelector, inputSelector, submitButtonSelector, ...rest}) {
-  const form = document.querySelector(formSelector);
   const forms = Array.from(document.querySelectorAll(formSelector));
   forms.forEach((form) => {
     form.addEventListener('submit', (evt) => handleFormSubmit(evt, form));
     
   const inputs = form.querySelectorAll(inputSelector);
   const button = form.querySelector(submitButtonSelector);
-
-  form.addEventListener('reset', () => {
-    disableButton(button, rest);
-  })
 
   checkButtonValidity(rest, form, button);
 

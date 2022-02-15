@@ -146,6 +146,14 @@ function handleNewCardFormSubmit (evt) {
   closePopupAddCard();
   cardNameInput.value = "";
   imgLinkInput.value = "";
+  disableButtonAfterNewCard();
+
+}
+
+// отключение кнопки после создания новой карточки
+function disableButtonAfterNewCard () {
+  cardSaveButton.setAttribute('disabled', "");
+  cardSaveButton.classList.add('popup__button_disabled');
 }
 
 //добавление и удаление лайка
