@@ -1,9 +1,9 @@
 .element__delete {
   width: 18px;
   height: 19px;
-  position: relative;
-  bottom: 270px;
-  left: 250px;
+  position: absolute;
+  right: 20px;
+  top: 20px;
   align-self: center;
   background-image: url(../../../images/trash.svg);
   background-repeat: no-repeat;

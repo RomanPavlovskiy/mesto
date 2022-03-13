@@ -22,9 +22,10 @@ export class Card {
 
   _deleteCard = () => {
     this._card.remove();
+    this._card = null;
     }
 
-  _setEventListeners () {
+  _setEventListeners() {
     const deleteCardButton = this._card.querySelector('.element__delete');
     deleteCardButton.addEventListener('click', this._deleteCard);
     this._likeCardButton.addEventListener('click', this._addLike);
@@ -43,7 +44,7 @@ export class Card {
     this._cardImage.alt = this._name;
     this._cardImage.src = this._link;
       
-    this._setEventListeners ()
+    this._setEventListeners()
 
     return this._card;
     }
