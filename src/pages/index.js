@@ -12,15 +12,16 @@ import {
   formAddCard,
   nameInput,
   jobInput,
-  elements,
   addCardButton,
   popupAddCloseButton,
   ValidationConfig,
   initialCards
 } from '../utils/constants.js';
 
-const section = new Section ({items: initialCards, renderer: (data) => {
-  elements.append(createCard(data));
+const section = new Section ({
+  items: initialCards, 
+  renderer: (data) => {
+  section.addItem(createCard(data));
   }}, 
   '.elements');
 section.renderItems();
@@ -33,10 +34,10 @@ imagePopup.setEventListeners();
 profilePopup.setEventListeners();
 addCardPopup.setEventListeners();
 
-const EditProfileValidator = new FormValidator(ValidationConfig, formEditProfile);
-const AddCardFormValidator = new FormValidator(ValidationConfig, formAddCard);
-EditProfileValidator.enableValidation();
-AddCardFormValidator.enableValidation();
+const editProfileValidator = new FormValidator(ValidationConfig, formEditProfile);
+const addCardFormValidator = new FormValidator(ValidationConfig, formAddCard);
+editProfileValidator.enableValidation();
+addCardFormValidator.enableValidation();
 
 function handleProfileFormSubmit(data) {
   const { name, description } = data;
@@ -61,14 +62,14 @@ function createCard(data) {
 };
 
 addCardButton.addEventListener('click', () => {
-  AddCardFormValidator.resetErrors();
-  AddCardFormValidator.showDisabledButton();
+  addCardFormValidator.resetErrors();
+  addCardFormValidator.showDisabledButton();
   addCardPopup.open()
 });
 popupAddCloseButton.addEventListener('click', addCardPopup.close());
 
 editProfilePopupButton.addEventListener('click', () => {
-  EditProfileValidator.resetErrors();
+  editProfileValidator.resetErrors();
   const { name, job } = userInfo.getUserInfo();
   nameInput.value = name;
   jobInput.value = job;

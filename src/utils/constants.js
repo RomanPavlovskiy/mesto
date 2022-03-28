@@ -4,7 +4,6 @@ export const formEditProfile = document.querySelector('.popup__form_type_profile
 export const formAddCard = document.querySelector('.popup__form_type_add-card');
 export const nameInput = document.querySelector('.popup__input_type_name');
 export const jobInput = document.querySelector('.popup__input_type_job');
-export const elements = document.querySelector('.elements');
 export const addCardButton = document.querySelector('.profile__add-button');
 export const popupAddCloseButton = document.querySelector('.popup__close_type_add-card');
 
