@@ -15,11 +15,29 @@ import {
   addCardButton,
   popupAddCloseButton,
   ValidationConfig,
-  initialCards
 } from '../utils/constants.js';
+import { api } from '../components/Api.js';
+
+api.getProfile()
+  .then(res => {
+    userInfo.setUserInfo(res.name, res.about)
+  })
+
+api.getInitialCards()
+  .then(cardList => {
+    cardList.forEach(data => {
+      const newCard = createCard({
+        name: data.name,
+        link: data.link,
+        likes: data.likes,
+        id: data._id
+    })
+    section.addItem(newCard)
+  })
+})
 
 const section = new Section ({
-  items: initialCards, 
+  items: [], 
   renderer: (data) => {
   section.addItem(createCard(data));
   }}, 
@@ -30,9 +48,14 @@ const userInfo = new UserInfo({ profileNameSelestor:'.profile__name', profileJob
 const imagePopup = new PopupWithImage('.popup_type_photo');
 const profilePopup = new PopupWithForm('.popup_type_profile', handleProfileFormSubmit);
 const addCardPopup = new PopupWithForm('.popup_type_add-card', handleNewCardFormSubmit);
+const confirmDeletePopup = new PopupWithForm('.popup_type_delete-confirm', () => {
+  api.deleteCard(id)
+});
 imagePopup.setEventListeners();
 profilePopup.setEventListeners();
 addCardPopup.setEventListeners();
+confirmDeletePopup.setEventListeners();
+
 
 const editProfileValidator = new FormValidator(ValidationConfig, formEditProfile);
 const addCardFormValidator = new FormValidator(ValidationConfig, formAddCard);
@@ -41,23 +64,44 @@ addCardFormValidator.enableValidation();
 
 function handleProfileFormSubmit(data) {
   const { name, description } = data;
-  userInfo.setUserInfo(name, description);
-  profilePopup.close();
+  api.editProfile(name, description)
+    .then(res => {
+      userInfo.setUserInfo(res.name, res.about);
+      profilePopup.close();
+    })
 }
 
 function handleNewCardFormSubmit(data) {
-  const newCard = createCard({
-    name: data['place'],
-    link: data['place-link']
-  });
-  section.addItem(newCard);
-  addCardPopup.close();
+  api.addCard(data['place'], data['place-link'])
+  .then(res => {
+    const newCard = createCard({
+      name: res.name,
+      link: res.link,
+      likes: res.likes,
+      id: res._id
+    })
+    section.addItem(newCard);
+    addCardPopup.close();
+  })
 }
 
 function createCard(data) {
-  const newCard = new Card(data, '.template', () => {
+  const newCard = new Card(data, 
+    '.template', 
+    () => {
     imagePopup.open(data.name, data.link)
-  }).createCard();
+    },
+    (id) => {
+      confirmDeletePopup.open(id)
+      confirmDeletePopup.changeSubmitHandler(() => {
+        api.deleteCard(id)
+        .then(res => {
+          confirmDeletePopup.close()
+          newCard.deleteCard()
+        })
+      })
+    }
+  ).createCard();
     return newCard;
 };
 
@@ -76,6 +120,3 @@ editProfilePopupButton.addEventListener('click', () => {
   profilePopup.open()
 });
 profilePopupCloseButton.addEventListener('click', profilePopup.close());
-
-
-

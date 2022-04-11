@@ -15,9 +15,9 @@
           <div class="profile__user">
             <img class="profile__avatar" src="<%=require('./images/avatar.jpg')%>" alt="аватарка">
             <div class="profile__info">
-              <h1 class="profile__name">Жак-Ив Кусто</h1>
+              <h1 class="profile__name"></h1>
               <button class="profile__edit" type="button" aria-label="редактировать профиль"></button>
-              <p class="profile__profession">Исследователь океана</p>
+              <p class="profile__profession"></p>
             </div>
           </div>
           <button class="profile__add-button" type="button" aria-label="добавить карточку"></button>
@@ -62,6 +62,17 @@
           </form>
         </div>
       </div>
+
+      <div class="popup popup_type_delete-confirm">
+        <div class="popup__container">
+          <button class="popup__close" type="button"></button>
+          <form class="popup__form" name="" novalidate>
+            <h3 class="popup__header">Вы уверены?</h3>
+            <button class="popup__button" type="submit">Да</button>
+          </form>
+        </div>
+      </div>
+
       <div class="popup popup_type_photo">
         <div class="popup__container-photo">
           <button class="popup__close popup__close_type_photo" type="button"></button>
@@ -78,6 +89,7 @@
           <div class="element__footer">
             <h2 class="element__title"></h2>
             <button class="element__like" type="button" aria-label="поставить лайк"></button>
+            <span class="element__count-like"></span>
           </div>
         </article>
       </template>
