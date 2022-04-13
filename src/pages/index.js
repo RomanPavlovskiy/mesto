@@ -16,7 +16,7 @@ import {
   popupAddCloseButton,
   updateProfileAvatarButton,
   formUpdateAvatar,
-  ValidationConfig,
+  validationConfig,
 } from '../utils/constants.js';
 import { api } from '../components/Api.js';
 
@@ -29,7 +29,8 @@ Promise.all([api.getProfile(), api.getInitialCards()])
     userId = user._id
     userInfo.setUserInfo(user.name, user.about, user.avatar)
 
-    cardList.forEach(data => {
+    const cardListReversed = cardList.reverse()
+    cardListReversed.forEach(data => {
       const newCard = createCard({
         name: data.name,
         link: data.link,
@@ -41,29 +42,10 @@ Promise.all([api.getProfile(), api.getInitialCards()])
       section.addItem(newCard)
     })
   })
-  .catch(err => console.log(`Error: ${err}`));
-
-// api.getProfile()
-//   .then(res => {
-//     userInfo.setUserInfo(res.name, res.about, res.avatar)
-//     userId = res._id
-//   })
-
-// api.getInitialCards()
-//   .then(cardList => {
-//     cardList.forEach(data => {
-//       const newCard = createCard({
-//         name: data.name,
-//         link: data.link,
-//         likes: data.likes,
-//         id: data._id,
-//         userId: userId,
-//         ownerId: data.owner._id
-//     })
-//     section.addItem(newCard)
-//   })
-// })
-
+  .catch((err) => {
+    console.log(err);
+  })
+  
 const section = new Section ({
   items: [], 
   renderer: (data) => {
@@ -91,9 +73,9 @@ avatarPopup.setEventListeners();
 
 //создаем экземпляры классов валидации для форм
 
-const editProfileValidator = new FormValidator(ValidationConfig, formEditProfile);
-const addCardFormValidator = new FormValidator(ValidationConfig, formAddCard);
-const avatarPopupValidator = new FormValidator(ValidationConfig, formUpdateAvatar);
+const editProfileValidator = new FormValidator(validationConfig, formEditProfile);
+const addCardFormValidator = new FormValidator(validationConfig, formAddCard);
+const avatarPopupValidator = new FormValidator(validationConfig, formUpdateAvatar);
 editProfileValidator.enableValidation();
 addCardFormValidator.enableValidation();
 avatarPopupValidator.enableValidation();
@@ -108,7 +90,7 @@ function handleAvatarFormSubmit(data) {
     avatarPopup.close()
   })
   .catch((err) => {
-    renderError(`Ошибка: ${err}`);
+    console.log(err)
   }) 
   .finally(() => {
     avatarPopup.renderLoading(false)
@@ -126,7 +108,7 @@ function handleProfileFormSubmit(data) {
       profilePopup.close();
     })
     .catch((err) => {
-      renderError(`Ошибка: ${err}`);
+      console.log(err)
     }) 
     .finally(() => {
       profilePopup.renderLoading(false)
@@ -151,7 +133,7 @@ function handleNewCardFormSubmit(data) {
     addCardPopup.close();
   })
   .catch((err) => {
-    renderError(`Ошибка: ${err}`);
+    console.log(err)
   }) 
   .finally(() => {
     addCardPopup.renderLoading(false)
@@ -174,6 +156,9 @@ function createCard(data) {
           confirmDeletePopup.close()
           newCard.deleteCard()
         })
+        .catch((err) => {
+        console.log(err)
+        })
       })
     },
     (id) => {
@@ -182,20 +167,27 @@ function createCard(data) {
         .then(res => {
          newCard.setLikes(res.likes)
        })
+       .catch((err) => {
+        console.log(err)
+       })
       } else {
         api.addLike(id)
         .then(res => {
         newCard.setLikes(res.likes)
         })
+        .catch((err) => {
+          console.log(err)
+        })
       }
     }
   );
     return newCard.generateCard();
-};
+}
 
 //навешиваем слушатели 
 
 updateProfileAvatarButton.addEventListener('click', () => {
+  avatarPopupValidator.showDisabledButton();
   avatarPopup.open()
 })
 

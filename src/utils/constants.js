@@ -9,7 +9,7 @@ export const popupAddCloseButton = document.querySelector('.popup__close_type_ad
 export const updateProfileAvatarButton = document.querySelector('.profile__avatar-update-edit');
 export const formUpdateAvatar = document.querySelector('.popup__form_type_avatar');
 
-export const ValidationConfig = {
+export const validationConfig = {
   formSelector: '.popup__form',
   inputSelector: '.popup__input',
   submitButtonSelector: '.popup__button',
