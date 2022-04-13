@@ -1,15 +1,18 @@
 export class Card {
-  constructor (data, cardTemplateSelector, handleImageClick, handleDeleteButtonClick) {
+  constructor (data, cardTemplateSelector, handleImageClick, handleDeleteButtonClick, handleLikeButtonClick) {
     this._name = data.name;
     this._link = data.link;
     this._likes = data.likes;
     this._id = data.id;
+    this._userId = data.userId;
+    this._ownerId = data.ownerId;
     this._cardTemplateSelector = cardTemplateSelector;
     this._handleImageClick = handleImageClick;
     this._handleDeleteButtonClick = handleDeleteButtonClick;
+    this._handleLikeButtonClick = handleLikeButtonClick;
   }
 
-  _getTemplate () {
+  _getTemplate() {
     const card = document
     .querySelector(this._cardTemplateSelector)
     .content
@@ -19,8 +22,9 @@ export class Card {
     return card;
   }
 
-  _addLike = () => {
-    this._likeCardButton.classList.toggle('element__like_add');
+  isLiked() {
+    const userHasLikedCard = this._likes.find(user => user._id === this._userId)
+    return userHasLikedCard
   }
 
   deleteCard() {
@@ -33,18 +37,35 @@ export class Card {
     deleteCardButton.addEventListener('click', () => {
       this._handleDeleteButtonClick(this._id)
     })
-    this._likeCardButton.addEventListener('click', this._addLike);
+    this._likeCardButton.addEventListener('click', () => {
+      this._handleLikeButtonClick(this._id)
+    })
     this._cardImage.addEventListener('click', () => {
       this._handleImageClick();
     })
   }
 
-  _setLikes() {
+  setLikes(newLikes) {
+    this._likes = newLikes
     const likeCountCard = this._card.querySelector('.element__count-like')
-    likeCountCard.textContent = '0'
+    likeCountCard.textContent = this._likes.length
+
+    if (this.isLiked()) {
+      this._fillLikeIcon()
+    } else {
+      this._clearLikeIcon()
+    }
   }
 
-  createCard() {
+  _fillLikeIcon = () => {
+    this._likeCardButton.classList.add('element__like_add');
+  }
+
+  _clearLikeIcon = () => {
+    this._likeCardButton.classList.remove('element__like_add');
+  }
+
+  generateCard() {
     this._card = this._getTemplate ();
     this._cardTitle = this._card.querySelector('.element__title');
     this._cardImage = this._card.querySelector('.element__photo');
@@ -55,7 +76,12 @@ export class Card {
     this._cardImage.src = this._link;
       
     this._setEventListeners()
-    this._setLikes()
+    this.setLikes(this._likes)
+
+    if (this._ownerId !== this._userId) {
+      this._card.querySelector('.element__delete').style.display = 'none'
+    }
+
     return this._card;
   }
 }
