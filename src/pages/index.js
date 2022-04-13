@@ -40,7 +40,6 @@ Promise.all([api.getProfile(), api.getInitialCards()])
         })
       section.addItem(newCard)
     })
-    console.log('все получилось')
   })
   .catch(err => console.log(`Error: ${err}`));
 
